@@ -1,0 +1,55 @@
+/* Estilo base del contenedor */
+.select-config-container {
+  max-width: 400px;
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+/* Título */
+.select-config-container h2 {
+  font-size: 20px;
+  margin-bottom: 16px;
+  text-align: center;
+  color: #333;
+}
+
+/* Estilo general de los selects */
+.select-config-container select {
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  border: none;
+  border-bottom: solid 3px #737373d7;
+  font-size: 14px;
+  background-color: transparent;
+  transition: border-color 0.2s ease;
+}
+
+.select-config-container select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Contenedor de fechas */
+.date-range {
+  margin-top: 16px;
+}
+
+.date-range label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #444;
+}
+
+.date-range input[type="date"] {
+  border: 1px solid #bbb;
+  padding: 3px;
+  font-size: 14px;
+  width: 100%;
+  margin-top: 4px;
+  background-color: transparent;
+  border: none;
+  border-bottom: solid 3px #737373d7;
+  font-size: 16px;
+}

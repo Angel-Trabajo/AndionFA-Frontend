@@ -1,0 +1,42 @@
+
+.select-file-card {
+  max-width: 400px;
+  min-width: 250px;
+  background-color: transparent;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 12px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.file-list {
+  max-height: 70vh; /* aprox 20 items * 14px + margen */
+  overflow-y: auto;
+  padding: 8px;
+  margin-bottom: 12px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn {
+  background-color: #3390ff;
+  color: white;
+  padding: 6px 14px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.btn:hover {
+  background-color: #0074e8;
+}

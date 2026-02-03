@@ -1,0 +1,35 @@
+
+.for-node {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: transparent;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  max-width: 1000px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+.for-node label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 50%;
+  color: #333;
+}
+
+.for-node input[type="text"] {
+  padding: 0.5rem 0.75rem;
+  margin-top: 0.3rem;
+  border: none;
+  border-bottom: 3px solid #737373d7;
+  background-color: transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-size: 1rem;
+}
+
+.for-node input[type="text"]:focus {
+  border-color: #6366f1; /* Indigo */
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  outline: none;
+}

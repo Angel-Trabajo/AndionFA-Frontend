@@ -1,0 +1,25 @@
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  margin-bottom: 4px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.file-item:hover {
+  background-color: #f0f0f0;
+}
+
+.file-item.selected {
+  background-color: #cce4ff;
+  border-color: #3390ff;
+}
+
+.file-icon {
+  width: 16px;
+  height: 16px;
+}
