@@ -1,6 +1,104 @@
-.button-box{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+
+/* ===== FORM CONTAINER ===== */
+.form {
+  max-width: 750px;
+  margin: auto;
+  padding: 30px; 
+  background:transparent;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* ===== FULL WIDTH ELEMENT ===== */
+.form > div:first-child {
+  grid-column: span 2;
+}
+
+/* ===== LABELS ===== */
+.form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #374151;
+  font-size: 14px;
+}
+
+/* ===== INPUTS ===== */
+.form input,
+.form select {
+  width: 90%;
+  padding: 5px 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  background-color: #f9fafb;
+}
+
+/* ===== INPUT FOCUS ===== */
+.form input:focus,
+.form select:focus {
+  outline: none;
+  border-color: #2563eb;
+  background-color: white;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* ===== REACT SELECT FIX ===== */
+.form .css-b62m3t-container {
+  font-size: 14px;
+}
+
+/* ===== BUTTON ===== */
+.form button {
+
+  padding: 6px;
+  margin-top: 8px;
+
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* hover */
+.form button:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* click */
+.form button:active {
+  transform: scale(0.98);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 700px) {
+  .form {
+    grid-template-columns: 1fr;
+  }
+
+  .form button,
+  .form > div:first-child {
+    grid-column: span 1;
+  }
+}
+
+.nodes-container {
+  padding: 10px;
+  background: transparent;
+  min-height: 100vh;
+}
+
+/* BOTON FULL WIDTH */
+.submit-container {
+  grid-column: 1 / -1; /* ocupa todas las columnas */
+}
+
+.submit-container button {
+  width: 100%;
 }

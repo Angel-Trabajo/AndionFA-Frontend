@@ -1,9 +1,11 @@
 // src/components/SelectFileExtract.jsx
 import { useState, useEffect } from 'react';
 import { getExecutorFiles } from '../service/FastService';
+import { postExtractorFiles } from '../service/FastService';
 import FileItem from './FileItem';
 import { useConfig } from '../context/ConfigContext';
 import '../styles/SelectFileExtract.css';
+
 
 const SelectFileExtract = () => {
   const [files, setFiles] = useState([]);
@@ -38,6 +40,20 @@ const SelectFileExtract = () => {
     
   };
 
+  const sendFiles = async () => {
+    if (selectedFiles.length === 0) {
+      alert('Por favor, selecciona al menos un archivo para extraer');
+      return;
+    }
+    try {
+      await postExtractorFiles(selectedFiles);
+      setSelectedFiles([]);
+      alert('Archivos seleccionados enviados para extracción');
+    } catch (error) {
+      console.error("Error sending files:", error);
+    }
+  };
+
   return (
     <div className="select-file-card">
       <h2 className="title">Seleccionar Archivos</h2>
@@ -56,6 +72,9 @@ const SelectFileExtract = () => {
       <div className="footer">
         <button className="btn" onClick={selectAll}>Seleccionar todos</button>
         <span>{selectedFiles.length} selecc</span>
+      </div>
+      <div>
+        <button className="btn" onClick={sendFiles}>Extraer</button>
       </div>
     </div>
   );

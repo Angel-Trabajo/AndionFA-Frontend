@@ -5,6 +5,7 @@
   background-color: transparent;
   padding: 10px;
   font-family: Arial, sans-serif;
+  border-left: 2px solid #aaa;
 }
 
 .title {
