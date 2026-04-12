@@ -53,6 +53,12 @@ const NodesCom = () => {
         MaxSuccessRate: generalConfig.data.MaxSuccessRate,
         ProgressiveVariation: generalConfig.data.ProgressiveVariation,
         MinOperations: generalConfig.data.min_operaciones,
+        MinOpenSymbolConfirmations: generalConfig.data.MinOpenSymbolConfirmations,
+        robust_trade_penalty_center: generalConfig.data.robust_trade_penalty_center,
+        lot_size: generalConfig.data.lot_size,
+        stop_loss: generalConfig.data.stop_loss,
+        take_profit: generalConfig.data.take_profit,
+        use_proces: generalConfig.data.use_proces,
       });
     }
   }, [generalConfig, reset]);
@@ -124,6 +130,10 @@ const NodesCom = () => {
         <div>
           <label htmlFor="timeFrame">Time Frame</label>
           <select id="timeFrame" {...register("timeFrame")}>
+            <option value="M1">M1</option>
+            <option value="M5">M5</option>
+            <option value="M15">M15</option>
+            <option value="M30">M30</option>
             <option value="H1">H1</option>
             <option value="H2">H2</option>
             <option value="H3">H3</option>
@@ -199,6 +209,36 @@ const NodesCom = () => {
         <div>
           <label>Min Operations</label>
           <input type="number" {...register("MinOperations", { valueAsNumber: true })} />
+        </div>
+
+        <div>
+          <label>Min Open Symbol Confirmations</label>
+          <input type="number" {...register("MinOpenSymbolConfirmations", { valueAsNumber: true })} />
+        </div>
+
+        <div>
+          <label>Robust Trade Penalty Center</label>
+          <input type="number" {...register("robust_trade_penalty_center", { valueAsNumber: true })} />
+        </div>
+
+        <div>
+          <label>Lot Size</label>
+          <input type="number" step="0.01" min="0" {...register("lot_size", { valueAsNumber: true })} />
+        </div>
+
+        <div>
+          <label>Stop Loss</label>
+          <input type="number" {...register("stop_loss", { valueAsNumber: true })} />
+        </div>
+
+        <div>
+          <label>Take Profit</label>
+          <input type="number" {...register("take_profit", { valueAsNumber: true })} />
+        </div>
+
+        <div>
+          <label>Use Processes</label>
+          <input type="number" {...register("use_proces", { valueAsNumber: true })} />
         </div>
 
         <div className="submit-container">

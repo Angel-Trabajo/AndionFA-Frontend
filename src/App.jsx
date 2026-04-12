@@ -1,20 +1,20 @@
 import {BrowserRouter, Routes} from 'react-router-dom'
-import PrivateRoutes from './routes/PrivateRoutes'
+import AppRoutes from './routes/PrivateRoutes'
 import { ConfigProvider } from './context/ConfigContext'
+import Layout from './layout/Layout'
 import './App.css'
 
 function App() {
-
   return (
-    <>
-      <BrowserRouter>
-        <ConfigProvider>
-        <Routes>
-          {PrivateRoutes}
-        </Routes>
-        </ConfigProvider>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <ConfigProvider>
+        <Layout>
+          <Routes>
+            {AppRoutes}
+          </Routes>
+        </Layout>
+      </ConfigProvider>
+    </BrowserRouter>
   )
 }
 

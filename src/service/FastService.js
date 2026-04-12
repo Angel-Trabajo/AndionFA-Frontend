@@ -1,5 +1,87 @@
 import FastApi from "../apis/FastApi";
 
+const BASE_URL = import.meta.env.VITE_FAST_API || "http://localhost:8000";
+
+export const startEngine = async () => {
+  const response = await FastApi.post('/engine/start');
+  return response.data;
+};
+
+export const stopEngine = async () => {
+  const response = await FastApi.post('/engine/stop');
+  return response.data;
+};
+
+export const getEngineStatus = async () => {
+  const response = await FastApi.get('/engine/status');
+  return response.data;
+};
+
+export const getNodes = async (params = {}) => {
+  const response = await FastApi.get('/config/nodes', { params });
+  return response.data;
+};
+
+export const listBackups = async () => {
+  const response = await FastApi.get('/config/backup/list');
+  return response.data;
+};
+
+export const createBackup = async () => {
+  const response = await FastApi.post('/config/backup/create');
+  return response.data;
+};
+
+export const restoreBackup = async (file) => {
+  const response = await FastApi.post('/config/backup/restore', null, { params: { file } });
+  return response.data;
+};
+
+export const getBackupDownloadUrl = (file) =>
+  `${BASE_URL}/config/backup/download/${encodeURIComponent(file)}`;
+
+export const getBacktestList = async () => {
+  const response = await FastApi.get('/config/backtest/list');
+  return response.data;
+};
+
+export const getBacktestEquity = async (symbol, mercado, algo) => {
+  const response = await FastApi.get('/config/backtest/equity', {
+    params: { symbol, mercado, algo },
+  });
+  return response.data;
+};
+
+export const runBacktest = async () => {
+  const response = await FastApi.post('/config/backtest/run');
+  return response.data;
+};
+
+export const getBacktestRunStatus = async () => {
+  const response = await FastApi.get('/config/backtest/run/status');
+  return response.data;
+};
+
+export const getBacktestConfig = async () => {
+  const response = await FastApi.get('/config/backtest/config');
+  return response.data;
+};
+
+export const saveBacktestConfig = async (date_start, date_end) => {
+  const response = await FastApi.post('/config/backtest/config', { date_start, date_end });
+  return response.data;
+};
+
+export const getBacktestEquityAll = async () => {
+  const response = await FastApi.get('/config/backtest/equity-all');
+  return response.data;
+};
+
+export const getMt5Status = async () => {
+  const response = await FastApi.get('/engine/mt5-status');
+  return response.data;
+};
+
 export const getExecutorFiles = async () => {
   try {
     const response = await FastApi.get('/config/extractor-files');
@@ -54,14 +136,24 @@ export const postGeneralConfig = async (data) =>{
 
 
 
-export const executeAlgorithm = async () => {
+export const executeAlgorithm = async (resetDb = false) => {
   try {
-    const response = await FastApi.post('/config/execute-algorithm');
+    const response = await FastApi.post('/config/execute-algorithm', { reset_db: resetDb });
     return response.data;
   } catch (error) {
     console.error("Error sending indicators request:", error);
     throw error;
   }
+}
+
+export const stopAlgorithm = async () => {
+  const response = await FastApi.post('/config/execute-stop');
+  return response.data;
+}
+
+export const getExecuteProgress = async () => {
+  const response = await FastApi.get('/config/execute-progress');
+  return response.data;
 }
 
 
