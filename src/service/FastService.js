@@ -7,13 +7,45 @@ export const startEngine = async () => {
   return response.data;
 };
 
-export const stopEngine = async () => {
-  const response = await FastApi.post('/engine/stop');
+export const stopEngine = async (mode = "graceful") => {
+  const response = await FastApi.post('/engine/stop', { mode });
   return response.data;
 };
 
 export const getEngineStatus = async () => {
   const response = await FastApi.get('/engine/status');
+  return response.data;
+};
+
+export const getLiveConfig = async () => {
+  const response = await FastApi.get('/engine/live-config');
+  return response.data;
+};
+
+export const saveLiveConfig = async (data) => {
+  const response = await FastApi.post('/engine/live-config', data);
+  return response.data;
+};
+
+export const applyLiveFilter = async () => {
+  const response = await FastApi.post('/engine/apply-filter');
+  return response.data;
+};
+
+export const updateEngineLotSize = async (engineId, lotSize) => {
+  const response = await FastApi.post(`/engine/engine/${encodeURIComponent(engineId)}/lot-size`, {
+    lot_size: lotSize,
+  });
+  return response.data;
+};
+
+export const stopSingleEngine = async (engineId, mode = "graceful") => {
+  const response = await FastApi.post(`/engine/engine/${encodeURIComponent(engineId)}/stop`, { mode });
+  return response.data;
+};
+
+export const getLiveStats = async () => {
+  const response = await FastApi.get('/engine/stats');
   return response.data;
 };
 

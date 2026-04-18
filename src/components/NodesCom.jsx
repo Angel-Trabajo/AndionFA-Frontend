@@ -55,7 +55,6 @@ const NodesCom = () => {
         MinOperations: generalConfig.data.min_operaciones,
         MinOpenSymbolConfirmations: generalConfig.data.MinOpenSymbolConfirmations,
         robust_trade_penalty_center: generalConfig.data.robust_trade_penalty_center,
-        lot_size: generalConfig.data.lot_size,
         stop_loss: generalConfig.data.stop_loss,
         take_profit: generalConfig.data.take_profit,
         use_proces: generalConfig.data.use_proces,
@@ -219,11 +218,6 @@ const NodesCom = () => {
         <div>
           <label>Robust Trade Penalty Center</label>
           <input type="number" {...register("robust_trade_penalty_center", { valueAsNumber: true })} />
-        </div>
-
-        <div>
-          <label>Lot Size</label>
-          <input type="number" step="0.01" min="0" {...register("lot_size", { valueAsNumber: true })} />
         </div>
 
         <div>

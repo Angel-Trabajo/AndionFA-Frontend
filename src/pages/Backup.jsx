@@ -9,6 +9,7 @@ import {
 const Backup = () => {
   const [backups, setBackups] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [restoringFile, setRestoringFile] = useState(null);
   const [msg, setMsg] = useState(null);
   const [msgType, setMsgType] = useState("ok");
   const fileRef = useRef(null);
@@ -47,11 +48,14 @@ const Backup = () => {
 
   const handleRestore = async (file) => {
     if (!window.confirm(`¿Restaurar la base de datos desde ${file}?\nEsta acción sobreescribe los datos actuales.`)) return;
+    setRestoringFile(file);
     try {
       await restoreBackup(file);
       notify(`Base de datos restaurada desde ${file}`);
     } catch (e) {
       notify(`Error al restaurar: ${e?.response?.data?.detail ?? e.message}`, "err");
+    } finally {
+      setRestoringFile(null);
     }
   };
 
@@ -102,6 +106,11 @@ const Backup = () => {
       </div>
 
       {msg && <p className={msgType === "ok" ? "status-ok" : "status-err"}>{msg}</p>}
+      {restoringFile && (
+        <p className="status-progress" style={{ color: "#3b82f6", fontWeight: "bold" }}>
+          ⏳ Restaurando {restoringFile}... Por favor espere
+        </p>
+      )}
 
       <div className="nodes-table-wrap" style={{ marginTop: 16 }}>
         <table className="nodes-table">
@@ -134,8 +143,9 @@ const Backup = () => {
                     <button
                       className="btn-warning btn-sm"
                       onClick={() => handleRestore(b)}
+                      disabled={restoringFile === b}
                     >
-                      Restaurar
+                      {restoringFile === b ? "⏳ Restaurando..." : "Restaurar"}
                     </button>
                   </div>
                 </td>

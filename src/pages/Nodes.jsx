@@ -2,6 +2,23 @@ import { useEffect, useState } from "react";
 import { getNodes } from "../service/FastService";
 
 const fmt = (v) => (v == null ? "—" : Number(v).toFixed(2));
+const fmtPct = (v) => (v == null ? "—" : `${(Number(v) * 100).toFixed(1)}%`);
+
+const prettyConditions = (raw) => {
+  if (!raw) return "—";
+  try {
+    const cond = JSON.parse(raw);
+    if (!Array.isArray(cond) || cond.length === 0) return "—";
+    const preview = cond
+      .slice(0, 2)
+      .map(([col, op, val]) => `${col} ${op} ${Number.isFinite(val) ? Number(val).toFixed(4) : val}`)
+      .join(" | ");
+    const suffix = cond.length > 2 ? ` +${cond.length - 2}` : "";
+    return `${preview}${suffix}`;
+  } catch {
+    return String(raw);
+  }
+};
 
 const Nodes = () => {
   const [nodes, setNodes] = useState([]);
@@ -91,22 +108,25 @@ const Nodes = () => {
             <table className="nodes-table">
               <thead>
                 <tr>
-                  <th>Symbol</th>
-                  <th>Cruce</th>
+                  <th>Par principal</th>
+                  <th>Par cruce</th>
                   <th>Mercado</th>
-                  <th>Label</th>
-                  <th>successful_operations</th>
-                  <th>current_porcentage</th>
-                  <th>successful_operations_os</th>
-                  <th>current_porcentage_os</th>
-                  <th>expectancy</th>
-                  <th>expectancy_os</th>
+                  <th>Dirección</th>
+                  <th>Regla (condiciones)</th>
+                  <th>Ops ganadoras (IS)</th>
+                  <th>Ops totales (IS)</th>
+                  <th>Acierto (IS)</th>
+                  <th>Ops ganadoras (OS)</th>
+                  <th>Ops totales (OS)</th>
+                  <th>Acierto (OS)</th>
+                  <th>Expectativa (IS)</th>
+                  <th>Expectativa (OS)</th>
                 </tr>
               </thead>
               <tbody>
                 {nodes.length === 0 && (
                   <tr>
-                    <td colSpan={10} style={{ textAlign: "center", color: "#9ca3af" }}>
+                    <td colSpan={13} style={{ textAlign: "center", color: "#9ca3af" }}>
                       Sin resultados
                     </td>
                   </tr>
@@ -121,10 +141,13 @@ const Nodes = () => {
                         {n.label}
                       </span>
                     </td>
+                    <td title={n.conditions || ""}>{prettyConditions(n.conditions)}</td>
                     <td>{n.successful_operations}</td>
-                    <td>{fmt(n.correct_percentage)}%</td>
+                    <td>{n.total_operations}</td>
+                    <td>{fmtPct(n.correct_percentage)}</td>
                     <td>{n.successful_operations_os}</td>
-                    <td>{fmt(n.correct_percentage_os)}%</td>
+                    <td>{n.total_operations_os}</td>
+                    <td>{fmtPct(n.correct_percentage_os)}</td>
                     <td>{fmt(n.expectancy)}</td>
                     <td>{fmt(n.expectancy_os)}</td>
                   </tr>
